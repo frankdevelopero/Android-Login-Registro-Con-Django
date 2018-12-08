@@ -14,7 +14,7 @@ import org.json.JSONObject
 class LoginControlador {
 
     interface LoginCallback {
-        fun enExito()
+        fun enExito(usuario: Usuario)
         fun enError(error: String)
     }
 
@@ -31,14 +31,17 @@ class LoginControlador {
                 try {
                     val obj = Usuario()
                     obj.email = it.getString("email")
-
+                    obj.first_name = it.getString("first_name")
+                    obj.last_name = it.getString("last_name")
+                    obj.id = it.getInt("id")
+                    callback.enExito(obj)
 
                 }catch (exception: JSONException){
-
+                    callback.enError(exception.toString())
                 }
             },
             Response.ErrorListener {
-
+                callback.enError(it.toString())
             })
 
         VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest)

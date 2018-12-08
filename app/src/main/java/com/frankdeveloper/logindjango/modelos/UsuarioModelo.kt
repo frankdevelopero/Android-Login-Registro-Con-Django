@@ -8,24 +8,24 @@ import com.frankdeveloper.logindjango.R
 class UsuarioModelo {
 
     //region TODO: ID
-    fun set_id(activity: Activity, token: String) {
+    fun set_id(activity: Activity, id: Int) {
         val sharedPref =
             activity.getSharedPreferences(activity.getString(R.string.usuario_get_id), Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
-        editor.putString(activity.getString(R.string.usuario_get_id), token)
+        editor.putInt(activity.getString(R.string.usuario_get_id), id)
         editor.apply()
     }
 
-    fun get_token(activity: Activity): String? {
+    fun get_id(activity: Activity): Int? {
         val prefs = activity.getSharedPreferences(activity.getString(R.string.usuario_get_id), Context.MODE_PRIVATE)
-        return prefs.getString(activity.getString(R.string.usuario_get_id), null)
+        return prefs.getInt(activity.getString(R.string.usuario_get_id), 0)
     }
 
-    fun del_token(activity: Activity) {
+    fun del_id(activity: Activity) {
         val sharedPref =
             activity.getSharedPreferences(activity.getString(R.string.usuario_get_id), Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
-        editor.putString(activity.getString(R.string.usuario_get_id), null)
+        editor.putInt(activity.getString(R.string.usuario_get_id), 0)
         editor.apply()
     }
     //endregion
